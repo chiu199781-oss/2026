@@ -34,8 +34,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
-
+    return "<h1>如果你看到這行字，代表 Python 跑通了，是 HTML 資料夾放錯位置！</h1>"
 @app.route("/mis")
 def course():
     return "<h1>資訊管理導論</h1><a href=/>回到網站首頁</a>"
