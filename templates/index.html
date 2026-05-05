@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>邱寶儀的個人網站</title>
+    <title>邱寶的個人網站</title>
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -74,21 +74,25 @@
 
         .nav-link[href*="cup"] { background-color: #e67e22; }
 
-        .nav-link[href*="read"], .nav-link[href*="search"], .nav-link[href*="spider1"] { background-color: #8e44ad; }
+        .nav-link[href*="read"], .nav-link[href*="search"], .nav-link[href*="spider1"], 
+        .nav-link[href*="movie1"], .nav-link[href*="movie2"], .nav-link[href*="movie3"]{ background-color: #8e44ad; }
 
+        .nav-link[href*="road"], .nav-link[href*="weather"] { background-color: #998800; }
+
+
+        
 
         @media (max-width: 600px) {
             .nav-grid {
                 grid-template-columns: 1fr;
             }
         }
-        .nav-link[href*="movie1"] { background-color: #e74c3c; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>邱寶儀的個人首頁</h1>
+    <h1>邱寶的個人首頁</h1>
     
     <div class="nav-grid">
         <a href="/mis" class="nav-link">課程資訊</a>
@@ -102,10 +106,13 @@
         <a href="/read" class="nav-link">Firestore 資料讀取</a>
         <a href="/search" class="nav-link">教師姓名查詢</a>
         <a href="/spider1" class="nav-link">爬取課程</a>
-        <a href="/movie1" class="nav-link">查詢即將上映電影</a>
+        <a href="/movie1" class="nav-link">爬取即將上映電影</a>
+        <a href="/movie2" class="nav-link">爬取電影進資料庫</a>
+        <a href="/movie3" class="nav-link">查詢電影資料庫</a>
+        <a href="/road" class="nav-link">十大肇事路口</a>
+        <a href="/weather" class="nav-link">查詢縣市天氣</a>
     </div>
 </div>
 
 </body>
-</html>
 </html>
