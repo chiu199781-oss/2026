@@ -37,7 +37,7 @@ def webhook():
     # fetch queryResult from json
     action =  req.get("queryResult").get("action")
     msg =  req.get("queryResult").get("queryText")
-    info = "動作：" + action + "； 查詢內容：" + msg
+    info = "我是邱寶開發的電影聊天機器人,您選擇的電影分級是" + action + "； 查詢內容：" + msg
     return make_response(jsonify({"fulfillmentText": info}))
 
 
