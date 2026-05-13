@@ -104,38 +104,10 @@ def rate():
             "lastUpdate": lastUpdate
         }
 
-db = firestore.client()
-
-collection_ref = db.collection("電影含分級")
-docs = collection_ref.get()
-
-result = ""
-
-for doc in docs:
-    data = doc.to_dict()
-
-    # 避免沒有 rate 欄位造成 KeyError
-    if "rate" in data:
-
-        # 比對分級
-        if rate in data["rate"]:
-
-            result += "片名：" + data.get("title", "無資料") + "\n"
-            result += "介紹：" + data.get("hyperlink", "無連結") + "\n\n"
-
-# 如果沒有找到資料
-if result == "":
-    result = "查無符合的電影分級資料"
-
-info += result
-
-return make_response(
-    jsonify({
-        "fulfillmentText": info
-    })
-)
-
-return "本週新片已爬蟲及存檔完畢，網站最近更新日期為：" + lastUpdate
+        db = firestore.client()
+        doc_ref = db.collection("本週新片含分級").document(movie_id)
+        doc_ref.set(doc)
+    return "本週新片已爬蟲及存檔完畢，網站最近更新日期為：" + lastUpdate
 
 
 @app.route("/weather", methods=["GET", "POST"])
