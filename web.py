@@ -1,3 +1,9 @@
+#pip install google-genai
+from google import genai
+
+#from PIL import Image
+#import numpy as np, easyocr
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -23,12 +29,53 @@ else:
 firebase_admin.initialize_app(cred)
 
 
-
 app = Flask(__name__)
+
+client = genai.Client()
 
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/AI")
+def AI():
+    # 每次使用者拜訪該路徑時，直接使用全域的 client 呼叫模型
+    response = client.models.generate_content(
+        model='gemini-3.5-flash',
+        contents='我想查詢靜宜大學資管系的評價？',
+    )
+    
+    # 回傳生成的文字
+    return response.text
+
+
+@app.route('/ask', methods=['GET', 'POST']) 
+def ask():
+    if request.method == "POST":
+        user_prompt = request.form.get('prompt', '')
+        if not user_prompt:
+            return "請輸入內容", 400
+        try:
+            response = client.models.generate_content(
+                model='gemini-3.5-flash',
+                contents=user_prompt,
+            )
+            return response.text
+        except Exception as e:
+            return f"發生錯誤: {str(e)}", 500
+
+    else:    
+        # 當使用者直接打開網頁 (GET) 時，顯示輸入框畫面
+        return render_template("ask.html")
+
+
+
+
+
+
+@app.route("/webdemo")
+def webdemo():
+    return render_template("webdemo.html")
 
 
 @app.route("/demo")
