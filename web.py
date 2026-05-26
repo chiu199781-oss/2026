@@ -89,10 +89,10 @@ def webhook():
     # fetch queryResult from json
     action =  req["queryResult"]["action"]
     #msg =  req["queryResult"]["queryText"]
-    #info = "我是邱寶設計的電影聊天機器人, 動作：" + action + "； 查詢內容：" + msg
+    #info = "我是楊子青設計的電影聊天機器人, 動作：" + action + "； 查詢內容：" + msg
     if (action == "rateChoice"):
         rate =  req["queryResult"]["parameters"]["rate"]
-        info = "我是邱寶設計的電影聊天機器人,您選擇的電影分級是：" + rate + "，相關電影：\n"
+        info = "我是楊子青設計的電影聊天機器人,您選擇的電影分級是：" + rate + "，相關電影：\n"
 
         db = firestore.client()
         collection_ref = db.collection("本週新片含分級")
@@ -106,9 +106,17 @@ def webhook():
 
         info += result
 
-
     elif (action == "input.unknown"):
-        info =  req["queryResult"]["queryText"]
+        #info =  req["queryResult"]["queryText"]
+
+        # 每次使用者拜訪該路徑時，直接使用全域的 client 呼叫模型
+        response = client.models.generate_content(
+            model='gemini-3.5-flash',
+            contents=req["queryResult"]["queryText"],
+        )
+        
+        # 回傳生成的文字
+        info = response.text
 
 
     return make_response(jsonify({"fulfillmentText": info}))
