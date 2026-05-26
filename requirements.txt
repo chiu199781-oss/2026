@@ -1,4 +1,4 @@
 flask
-requests
-beautifulsoup4
-firebase-admin
+firebase_admin
+bs4
+google-genai
